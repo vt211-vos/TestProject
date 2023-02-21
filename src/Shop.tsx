@@ -93,7 +93,9 @@ function Basket(){
                 <List sx={{width: '400px'}}>
                     <ListItem>
                         <ListItemIcon>
-                            <ShoppingBasket />
+                            <ShoppingBasket
+                                onClick={()=>setIsOpen(false)}
+                            />
                         </ListItemIcon>
                         <ListItemText primary="Корзина" />
                     </ListItem>
