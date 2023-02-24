@@ -17,13 +17,14 @@ interface Good{
     poster: string,
     price: number
 }
-interface BasketGood{
-    id: string,
-    name: string,
-    price: number
+interface BasketGood {
+    id: string ;
+    name: string ;
+    price: number ;
 }
 
 
+///Goods
 export const Goods$ = atom<Good[]>({
     key: "Goods",
     default: [
@@ -112,6 +113,35 @@ export const Goods$ = atom<Good[]>({
             price: 1550,
         }]
 })
+export const GoodIds$ = selector({
+    key: "GoodIds",
+    get({get}){
+        return get(Goods$).map(i => i.id)
+    }
+})
+
+export const Good$ = selectorFamily({
+    key: "Good",
+    get: (id: string)=>({get})=>{
+        const good = get(Goods$).find(i => i.id === id)
+        if(typeof good === "undefined") {
+            const item: Good = {
+                id: "0",
+                category: "0",
+                name: "0",
+                poster: "0",
+                price: 0
+            }
+            return item
+        }
+        else {
+            return good
+        }
+
+    }
+})
+
+///Basket
 export const IsOpenBasket$ = atom({
     key: "IsOpenBasket",
     default: false
@@ -121,6 +151,20 @@ export const Basket$ = atom<BasketGood[]>({
     key: "Basket",
     default: []
 })
+
+////BasketAction
+export const checkInclude$ = selectorFamily({
+    key: "checkInclude",
+    get: (id: string)=>({get})=>{
+        const check = get(Basket$).find(i => i.id === id)
+        return check === undefined
+    }
+})
+
+
+
+
+///Assessment
 export const active$ = atom({
     key: "active$",
     default: false
