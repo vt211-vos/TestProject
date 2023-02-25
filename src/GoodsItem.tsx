@@ -6,19 +6,22 @@ import {useEffect} from "react";
 function ButtonBuy({id}:{id:string}){
     const good = useRecoilValue(Good$(id))
     const setBasket = useSetRecoilState(Basket$)
-    const checkInclude = useRecoilValue(checkInclude$(id))
 
     return(<Button
         variant="text"
         onClick={() =>{
-            checkInclude &&
-            setBasket(prev => prev.concat(
-                {
-                    id: good.id,
-                    name: good.name,
-                    price: good.price,
+
+            setBasket((prev)=>{
+                if((prev.find(i=>i.id===id))===undefined){
+                    return [...prev, {
+                        id: good.id,
+                        name: good.name,
+                        price: good.price,
+                    }]
                 }
-            ))
+                return prev
+
+            })
 
         }
 

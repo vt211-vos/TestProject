@@ -9,7 +9,7 @@ import {IsOpenBasket$} from "./store";
 export function Header() {
     const openBasket = useSetRecoilState(IsOpenBasket$)
     return(
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
                 <Typography
                     variant="h6"

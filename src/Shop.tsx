@@ -24,7 +24,7 @@ export function Shop() {
     return(
         <>
 
-            <Grid sx={{mt: 1}} container spacing={2}>
+            <Grid sx={{mt: 8}} container spacing={2}>
                 {goodIds.map((item) => (
                     <GoodsItem key={item} id={item}/>
                 ))}
